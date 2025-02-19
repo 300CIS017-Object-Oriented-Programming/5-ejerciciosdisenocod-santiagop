@@ -11,3 +11,29 @@ La clase espacio le faltan atributos requeridos en la descripcion(identificador 
 
 ### Diseño 3
 Pasar algunos datos ponerlos privados, falta la funcion liberar reserva( liberarReserva(Espacio) ) y cambiar le flecha de reserva .
+
+## Diagrama de reservas.
+    classDiagram
+    class Espacio {
+        -int idEspacio
+        -string +tipo
+        -int capacidad
+        -bool disponible
+        -double tarifa
+    }
+
+    class Reserva {
+        -int idReserva
+        -Espacio* espacio
+        +double calcularCosto()
+    }
+
+    class GestorReservas {
+        +list reservas
+        +void consultarDisponibilidad()
+        +void realizarReserva(Espacio, int)
+        +void cancelarReserva(Reserva)
+        +void liberarReserva(Reserva) 
+    }
+    Espacio "1" -- "1" Reserva : "Usa"
+    GestorReservas "1" --> "*" Reserva : "Gestiona"
