@@ -13,6 +13,7 @@ La clase espacio le faltan atributos requeridos en la descripcion(identificador 
 Pasar algunos datos ponerlos privados, falta la funcion liberar reserva( liberarReserva(Espacio) ) y cambiar le flecha de reserva .
 
 ## Diagrama de reservas.
+
     classDiagram
     class Espacio {
         -int idEspacio
@@ -37,3 +38,40 @@ Pasar algunos datos ponerlos privados, falta la funcion liberar reserva( liberar
     }
     Espacio "1" -- "1" Reserva : "Usa"
     GestorReservas "1" --> "*" Reserva : "Gestiona"
+
+# Punto 2 :(
+
+### Diagrama de reciclaje
+
+    classDiagram
+    direction TB
+    class Ciudadano {
+        +String id
+        +String nombre
+        +int telefono
+        +int puntos
+        +registrarse()
+        +entregarMaterial(tipoMaterial, peso)
+        +verPuntos()
+        +canjearPuntos(puntos)
+    }
+
+    class Empleado {
+	    +String id
+	    +String nombre
+	    +registrarEntrega(idCiudadano, tipoMaterial, peso)
+	    +calcularPuntos(tipoMaterial, peso)
+    }
+
+    class SistemaReciclaje {
+	    +registrarCiudadano(id, nombre, telefono)
+	    +registrarEntrega(idCiudadano, tipoMaterial, peso)
+	    +verPuntos(idCiudadano)
+	    +canjearPuntos(idCiudadano, puntos)
+    }
+
+    Ciudadano  -->  SistemaReciclaje : utiliza
+    Empleado  -->  SistemaReciclaje : trabaja con
+    Empleado  -->  Ciudadano : registra entregas
+
+
